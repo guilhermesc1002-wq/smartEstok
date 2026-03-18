@@ -1,18 +1,24 @@
 package com.crud.project.models;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "funcionarios")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Funcionario implements Usuario{
+public class Funcionario extends Usuario {
 
-    int idade;
-    String cpf;
+    @NotBlank(message = "CPF é obrigatório")
+    @Column(nullable = false, length = 11, unique = true)
+    private String cpf;
+
+    @Min(value = 0, message = "Idade não pode ser negativa")
+    @Max(value = 150, message = "Idade deve ser realista")
+    @Column(nullable = false)
+    private int idade;
 }

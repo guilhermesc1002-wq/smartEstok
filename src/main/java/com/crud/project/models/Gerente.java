@@ -1,17 +1,19 @@
 package com.crud.project.models;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "gerentes")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Gerente implements Usuario{
+public class Gerente extends Usuario {
 
-
+    @NotBlank(message = "Departamento é obrigatório")
+    @Column(nullable = false)
+    private String departamento;
 }
