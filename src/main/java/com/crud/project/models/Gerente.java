@@ -1,19 +1,38 @@
 package com.crud.project.models;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "gerentes")
+@Document(collection = "gerentes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Gerente extends Usuario {
+public class Gerente {
 
-    @NotBlank(message = "Departamento é obrigatório")
-    @Column(nullable = false)
+    private String id;
+
+    @NotBlank(message = "Nome é obrigatório")
+    private String nomeColaborador;
+
+    @NotBlank(message = "Email é obrigatório")
+    @Email(message = "Email deve ser válido")
+    private String email;
+
+    @NotBlank(message = "Senha é obrigatória")
+    private String senha;
+
+    @NotNull(message = "Cargo é obrigatório")
+    private Cargos cargos;
+
+    private String mercadoId;
+
+    private boolean ativo = true;
+
+    @NotBlank(message = "CPF é obrigatório")
+    private String cpf;
+
     private String departamento;
 }

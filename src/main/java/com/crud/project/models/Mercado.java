@@ -1,38 +1,31 @@
 package com.crud.project.models;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "mercados")
+@Document(collection = "mercados")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Mercado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @NotBlank(message = "Nome do mercado é obrigatório")
-    @Column(nullable = false)
     private String nome;
 
-    @NotBlank(message = "CNPJ é obrigatório")
-    @Column(nullable = false, length = 14, unique = true)
-    private String cnpj;
-
     @NotBlank(message = "Endereço é obrigatório")
-    @Column(nullable = false)
     private String endereco;
 
-    @Email(message = "Email deve ser válido")
-    @Column(nullable = false, unique = true)
-    private String email;
+    @NotBlank(message = "Telefone é obrigatório")
+    private String telefone;
 
-    @Column(nullable = false)
-    private boolean ativo = true;
+    private String cidade;
+
+    private String estado;
 }
