@@ -2,7 +2,8 @@ package com.crud.project.controllers;
 
 import com.crud.project.models.Usuario;
 import com.crud.project.repositories.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +22,12 @@ import java.util.Optional;
  * - PUT /api/usuarios/{id} → Atualizar usuário
  * - DELETE /api/usuarios/{id} → Deletar usuário
  */
+@Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
 
-    @Autowired
     private UsuarioRepository usuarioRepository;
 
     /**

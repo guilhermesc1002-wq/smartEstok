@@ -32,4 +32,62 @@ public class Produtos {
     private String fornecedorId;
 
     private String categoria;
+
+    // Getters explícitos
+    public String getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public String getFornecedorId() {
+        return fornecedorId;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    // Setters explícitos
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public void setFornecedorId(String fornecedorId) {
+        this.fornecedorId = fornecedorId;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 }

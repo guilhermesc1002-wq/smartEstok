@@ -2,8 +2,10 @@ package com.crud.project.controllers;
 
 import com.crud.project.dto.ImportacaoResultadoDTO;
 import com.crud.project.services.ImportacaoVendasService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,12 @@ import org.springframework.web.multipart.MultipartFile;
  * - POST /api/importacao/excel → Importar EXCEL
  */
 @Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/importacao")
 public class ImportacaoController {
 
-    @Autowired
+    private static final Logger log = LoggerFactory.getLogger(ImportacaoController.class);
     private ImportacaoVendasService importacaoVendasService;
 
     /**

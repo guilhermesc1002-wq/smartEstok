@@ -2,7 +2,8 @@ package com.crud.project.controllers;
 
 import com.crud.project.models.Mercado;
 import com.crud.project.repositories.MercadoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +22,12 @@ import java.util.Optional;
  * - PUT /api/mercados/{id} → Atualizar mercado
  * - DELETE /api/mercados/{id} → Deletar mercado
  */
+@Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/mercados")
 public class MercadoController {
 
-    @Autowired
     private MercadoRepository mercadoRepository;
 
     /**

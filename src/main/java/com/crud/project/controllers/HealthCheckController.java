@@ -1,5 +1,6 @@
 package com.crud.project.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +17,11 @@ import java.util.Map;
  * - GET /api/info → Informações da aplicação
  * - GET /api → Bem-vindo à API
  */
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class HealthCheckController {
+
 
     /**
      * Health Check - Verifica se a aplicação está rodando

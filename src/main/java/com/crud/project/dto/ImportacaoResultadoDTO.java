@@ -31,5 +31,78 @@ public class ImportacaoResultadoDTO {
     private Double tempoProcessamento; // em segundos
 
     private String mensagem;
-}
 
+    // Getters explícitos
+    public String getNomeArquivo() {
+        return nomeArquivo;
+    }
+
+    public String getTipoArquivo() {
+        return tipoArquivo;
+    }
+
+    public Integer getTotalRegistros() {
+        return totalRegistros;
+    }
+
+    public Integer getRegistrosComSucesso() {
+        return registrosComSucesso;
+    }
+
+    public Integer getRegistrosComErro() {
+        return registrosComErro;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public List<String> getErros() {
+        return erros;
+    }
+
+    public Double getTempoProcessamento() {
+        return tempoProcessamento;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    // Setters explícitos
+    public void setNomeArquivo(String nomeArquivo) {
+        this.nomeArquivo = nomeArquivo;
+    }
+
+    public void setTipoArquivo(String tipoArquivo) {
+        this.tipoArquivo = tipoArquivo;
+    }
+
+    public void setTotalRegistros(Integer totalRegistros) {
+        this.totalRegistros = totalRegistros;
+    }
+
+    public void setRegistrosComSucesso(Integer registrosComSucesso) {
+        this.registrosComSucesso = registrosComSucesso;
+    }
+
+    public void setRegistrosComErro(Integer registrosComErro) {
+        this.registrosComErro = registrosComErro;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setErros(List<String> erros) {
+        this.erros = erros;
+    }
+
+    public void setTempoProcessamento(Double tempoProcessamento) {
+        this.tempoProcessamento = tempoProcessamento;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+}

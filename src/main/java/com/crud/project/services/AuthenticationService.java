@@ -6,12 +6,18 @@ import com.crud.project.models.Funcionario;
 import com.crud.project.models.Gerente;
 import com.crud.project.repositories.FuncionarioRepository;
 import com.crud.project.repositories.GerenteRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class AuthenticationService {
+
+    private static final Logger log = LoggerFactory.getLogger(AuthenticationService.class);
 
     @Autowired
     private FuncionarioRepository funcionarioRepository;
@@ -23,63 +29,77 @@ public class AuthenticationService {
      * Valida credenciais de login e retorna informações do usuário
      */
     public LoginResponse authenticate(LoginRequest loginRequest) {
-        String email = loginRequest.getEmail();
-        String senha = loginRequest.getSenha();
+        try {
+            String email = loginRequest.getEmail();
+            String senha = loginRequest.getSenha();
 
-        // Buscar como Funcionário
-        Optional<Funcionario> funcionario = funcionarioRepository.findByEmail(email);
-        if (funcionario.isPresent()) {
-            Funcionario func = funcionario.get();
-            
-            // Validar senha
-            if (validarSenha(senha, func.getSenha())) {
-                if (!func.isAtivo()) {
-                    throw new RuntimeException("Usuário inativo");
+            // Buscar como Funcionário
+            Optional<Funcionario> funcionario = funcionarioRepository.findByEmail(email);
+            if (funcionario.isPresent()) {
+                Funcionario func = funcionario.get();
+
+                // Validar senha
+                if (validarSenha(senha, func.getSenha())) {
+                    if (!func.isAtivo()) {
+                        throw new RuntimeException("Usuário inativo");
+                    }
+
+                    return LoginResponse.builder()
+                            .id(func.getId())
+                            .email(func.getEmail())
+                            .nomeColaborador(func.getNomeColaborador())
+                            .cargo(func.getCargos().toString())
+                            .tipo("FUNCIONARIO")
+                            .mercadoId(func.getMercadoId())
+                            .ativo(func.isAtivo())
+                            .message("Login realizado com sucesso como Funcionário")
+                            .build();
+                } else {
+                    throw new RuntimeException("Senha incorreta");
                 }
-                
-                return LoginResponse.builder()
-                        .id(func.getId())
-                        .email(func.getEmail())
-                        .nomeColaborador(func.getNomeColaborador())
-                        .cargo(func.getCargos().toString())
-                        .tipo("FUNCIONARIO")
-                        .mercadoId(func.getMercadoId())
-                        .ativo(func.isAtivo())
-                        .message("Login realizado com sucesso como Funcionário")
-                        .build();
-            } else {
-                throw new RuntimeException("Senha incorreta");
             }
-        }
 
-        // Buscar como Gerente
-        Optional<Gerente> gerente = gerenteRepository.findByEmail(email);
-        if (gerente.isPresent()) {
-            Gerente ger = gerente.get();
-            
-            // Validar senha
-            if (validarSenha(senha, ger.getSenha())) {
-                if (!ger.isAtivo()) {
-                    throw new RuntimeException("Usuário inativo");
+            // Buscar como Gerente
+            Optional<Gerente> gerente = gerenteRepository.findByEmail(email);
+            if (gerente.isPresent()) {
+                Gerente ger = gerente.get();
+
+                // Validar senha
+                if (validarSenha(senha, ger.getSenha())) {
+                    if (!ger.isAtivo()) {
+                        throw new RuntimeException("Usuário inativo");
+                    }
+
+                    return LoginResponse.builder()
+                            .id(ger.getId())
+                            .email(ger.getEmail())
+                            .nomeColaborador(ger.getNomeColaborador())
+                            .cargo(ger.getCargos().toString())
+                            .tipo("GERENTE")
+                            .mercadoId(ger.getMercadoId())
+                            .ativo(ger.isAtivo())
+                            .message("Login realizado com sucesso como Gerente")
+                            .build();
+                } else {
+                    throw new RuntimeException("Senha incorreta");
                 }
-                
-                return LoginResponse.builder()
-                        .id(ger.getId())
-                        .email(ger.getEmail())
-                        .nomeColaborador(ger.getNomeColaborador())
-                        .cargo(ger.getCargos().toString())
-                        .tipo("GERENTE")
-                        .mercadoId(ger.getMercadoId())
-                        .ativo(ger.isAtivo())
-                        .message("Login realizado com sucesso como Gerente")
-                        .build();
-            } else {
-                throw new RuntimeException("Senha incorreta");
             }
-        }
 
-        // Usuário não encontrado
-        throw new RuntimeException("Usuário não encontrado");
+            // Usuário não encontrado
+            throw new RuntimeException("Usuário não encontrado");
+        } catch (com.mongodb.MongoTimeoutException e) {
+            log.error("❌ MongoDB timeout - Banco indisponível: {}", e.getMessage());
+            throw new RuntimeException("⏱️ MongoDB indisponível. Servidor indisponível. Tente novamente em alguns momentos.", e);
+        } catch (com.mongodb.MongoException e) {
+            log.error("❌ Erro MongoDB: {}", e.getMessage());
+            throw new RuntimeException("🔴 Erro de conexão com banco de dados. Verifique sua conexão com o MongoDB.", e);
+        } catch (RuntimeException e) {
+            log.warn("⚠️ Erro de autenticação: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            log.error("❌ Erro inesperado no login: {}", e.getMessage());
+            throw new RuntimeException("❌ Erro ao processar login: " + e.getMessage(), e);
+        }
     }
 
     /**

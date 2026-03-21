@@ -2,15 +2,18 @@ package com.crud.project.Config;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MongoConfig {
 
+    @Value("${spring.data.mongodb.uri}")
+    private String mongoUri;
+
     @Bean
     public MongoClient mongoClient() {
-        String uri = "mongodb+srv://smartstock:smartD%40stock@smartstock.erkrji7.mongodb.net/?appName=smartstock";
-        return MongoClients.create(uri);
+        return MongoClients.create(mongoUri);
     }
 }

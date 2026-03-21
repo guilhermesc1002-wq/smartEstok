@@ -2,7 +2,8 @@ package com.crud.project.controllers;
 
 import com.crud.project.models.Fornecedor;
 import com.crud.project.repositories.FornecedorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +23,12 @@ import java.util.Optional;
  * - PUT /api/fornecedores/{id} → Atualizar fornecedor
  * - DELETE /api/fornecedores/{id} → Deletar fornecedor
  */
+@Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/fornecedores")
 public class FornecedorController {
 
-    @Autowired
     private FornecedorRepository fornecedorRepository;
 
     /**

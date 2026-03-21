@@ -6,10 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "funcionarios")
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Document(collection = "funcionarios")
 public class Funcionario {
 
     private String id;
@@ -37,4 +38,78 @@ public class Funcionario {
     @Min(value = 0, message = "Idade não pode ser negativa")
     @Max(value = 150, message = "Idade deve ser realista")
     private int idade;
+
+    // Getters explícitos
+    public String getId() {
+        return id;
+    }
+
+    public String getNomeColaborador() {
+        return nomeColaborador;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public Cargos getCargos() {
+        return cargos;
+    }
+
+    public String getMercadoId() {
+        return mercadoId;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    // Setters explícitos
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setNomeColaborador(String nomeColaborador) {
+        this.nomeColaborador = nomeColaborador;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setCargos(Cargos cargos) {
+        this.cargos = cargos;
+    }
+
+    public void setMercadoId(String mercadoId) {
+        this.mercadoId = mercadoId;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
 }

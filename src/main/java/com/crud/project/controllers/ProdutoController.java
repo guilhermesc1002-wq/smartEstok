@@ -2,7 +2,8 @@ package com.crud.project.controllers;
 
 import com.crud.project.models.Produtos;
 import com.crud.project.repositories.ProdutosRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +23,12 @@ import java.util.Optional;
  * - PUT /api/produtos/{id} → Atualizar produto
  * - DELETE /api/produtos/{id} → Deletar produto
  */
+@Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/produtos")
 public class ProdutoController {
 
-    @Autowired
     private ProdutosRepository produtosRepository;
 
     /**
