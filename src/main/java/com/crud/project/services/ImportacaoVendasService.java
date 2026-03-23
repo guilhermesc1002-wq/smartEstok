@@ -6,7 +6,6 @@ import com.crud.project.repositories.VendaRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -26,7 +25,6 @@ import java.util.*;
  * - CSV
  * - EXCEL (.xlsx)
  */
-@Slf4j
 @AllArgsConstructor
 @Service
 public class ImportacaoVendasService {

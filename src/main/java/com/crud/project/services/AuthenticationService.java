@@ -6,14 +6,13 @@ import com.crud.project.models.Funcionario;
 import com.crud.project.models.Gerente;
 import com.crud.project.repositories.FuncionarioRepository;
 import com.crud.project.repositories.GerenteRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
+import java.util.UUID;
 
-@Slf4j
 @Service
 public class AuthenticationService {
 
@@ -52,6 +51,7 @@ public class AuthenticationService {
                             .tipo("FUNCIONARIO")
                             .mercadoId(func.getMercadoId())
                             .ativo(func.isAtivo())
+                            .token(UUID.randomUUID().toString())
                             .message("Login realizado com sucesso como Funcionário")
                             .build();
                 } else {
@@ -78,6 +78,7 @@ public class AuthenticationService {
                             .tipo("GERENTE")
                             .mercadoId(ger.getMercadoId())
                             .ativo(ger.isAtivo())
+                            .token(UUID.randomUUID().toString())
                             .message("Login realizado com sucesso como Gerente")
                             .build();
                 } else {

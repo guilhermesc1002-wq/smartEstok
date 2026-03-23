@@ -6,7 +6,6 @@ import com.crud.project.services.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@Slf4j
 @RestController
 @RequestMapping("/api")
 public class LoginController {
@@ -141,24 +139,6 @@ public class LoginController {
             this.error = error;
             this.message = message;
         }
-
-        // Getters explícitos
-        public String getError() {
-            return error;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        // Setters explícitos
-        public void setError(String error) {
-            this.error = error;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
     }
 
     @Data
@@ -169,47 +149,17 @@ public class LoginController {
         public MessageResponse(String message) {
             this.message = message;
         }
-
-        // Getter explícito
-        public String getMessage() {
-            return message;
-        }
-
-        // Setter explícito
-        public void setMessage(String message) {
-            this.message = message;
-        }
     }
 
     @Data
     @NoArgsConstructor
     public static class EmailRequest {
         private String email;
-
-        // Getters explícitos
-        public String getEmail() {
-            return email;
-        }
-
-        // Setters explícitos
-        public void setEmail(String email) {
-            this.email = email;
-        }
     }
 
     @Data
     @NoArgsConstructor
     public static class CpfRequest {
         private String cpf;
-
-        // Getters explícitos
-        public String getCpf() {
-            return cpf;
-        }
-
-        // Setters explícitos
-        public void setCpf(String cpf) {
-            this.cpf = cpf;
-        }
     }
 }

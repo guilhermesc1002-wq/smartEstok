@@ -1,7 +1,6 @@
 package com.crud.project.controllers;
 
 import com.crud.project.services.ImportacaoVendasService;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -20,7 +19,6 @@ import java.util.Map;
  * Controller para tratamento de erros HTTP
  * Substitui a página padrão "Whitelabel Error Page"
  */
-@Slf4j
 @RestController
 @RequestMapping("/error")
 public class CustomErrorController {
