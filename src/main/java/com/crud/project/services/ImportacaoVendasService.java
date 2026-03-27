@@ -6,6 +6,7 @@ import com.crud.project.repositories.VendaRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -145,6 +146,7 @@ public class ImportacaoVendasService {
      * Processar linha CSV
      * Formato esperado: produtoId, nomeProduto, quantidadeVendida, precoUnitario, mercadoId, nomeMercado, funcionarioId, nomeFuncionario, dataVenda, categoria, observacoes, numeroNota
      */
+
     private Venda processarLinhaCSV(String[] linha) {
         if (linha.length < 9) {
             throw new RuntimeException("Linha com número insuficiente de colunas. Esperado: 12, Recebido: " + linha.length);
@@ -153,13 +155,13 @@ public class ImportacaoVendasService {
         Venda venda = new Venda();
 
         try {
-            venda.setProdutoId(linha[0].trim());
+            venda.setProdutoId(Long.parseLong(linha[0].trim()));
             venda.setNomeProduto(linha[1].trim());
             venda.setQuantidadeVendida(Integer.parseInt(linha[2].trim()));
             venda.setPrecoUnitario(Double.parseDouble(linha[3].trim()));
-            venda.setMercadoId(linha[4].trim());
+            venda.setMercadoId(Long.parseLong(linha[4].trim()));
             venda.setNomeMercado(linha[5].trim());
-            venda.setFuncionarioId(linha[6].trim());
+            venda.setFuncionarioId(Long.parseLong(linha[6].trim()));
             venda.setNomeFuncionario(linha[7].trim());
             venda.setDataVenda(parseData(linha[8].trim()));
             venda.setCategoria(linha.length > 9 ? linha[9].trim() : "");
@@ -183,13 +185,13 @@ public class ImportacaoVendasService {
         Venda venda = new Venda();
 
         try {
-            venda.setProdutoId(obterValorCelula(row, 0));
+            venda.setProdutoId(Long.parseLong(obterValorCelula(row, 0)));
             venda.setNomeProduto(obterValorCelula(row, 1));
             venda.setQuantidadeVendida((int) Double.parseDouble(obterValorCelula(row, 2)));
             venda.setPrecoUnitario(Double.parseDouble(obterValorCelula(row, 3)));
-            venda.setMercadoId(obterValorCelula(row, 4));
+            venda.setMercadoId(Long.parseLong(obterValorCelula(row, 4)));
             venda.setNomeMercado(obterValorCelula(row, 5));
-            venda.setFuncionarioId(obterValorCelula(row, 6));
+            venda.setFuncionarioId(Long.parseLong(obterValorCelula(row, 6)));
             venda.setNomeFuncionario(obterValorCelula(row, 7));
             venda.setDataVenda(parseData(obterValorCelula(row, 8)));
             venda.setCategoria(obterValorCelula(row, 9));

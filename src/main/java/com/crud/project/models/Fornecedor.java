@@ -1,21 +1,21 @@
 package com.crud.project.models;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-
-@Document(collection = "fornecedores")
+@Entity
+@Table(name = "fornecedores")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Fornecedor {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "Nome do fornecedor é obrigatório")
     private String nome;
@@ -31,53 +31,19 @@ public class Fornecedor {
 
     private String cnpj;
 
-    // Getters explícitos
-    public String getId() {
-        return id;
-    }
+    // Manual getters
+    public Long getId() { return id; }
+    public String getNome() { return nome; }
+    public String getTelefone() { return telefone; }
+    public String getEmail() { return email; }
+    public String getEndereco() { return endereco; }
+    public String getCnpj() { return cnpj; }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    // Setters explícitos
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
+    // Manual setters
+    public void setId(Long id) { this.id = id; }
+    public void setNome(String nome) { this.nome = nome; }
+    public void setTelefone(String telefone) { this.telefone = telefone; }
+    public void setEmail(String email) { this.email = email; }
+    public void setEndereco(String endereco) { this.endereco = endereco; }
+    public void setCnpj(String cnpj) { this.cnpj = cnpj; }
 }

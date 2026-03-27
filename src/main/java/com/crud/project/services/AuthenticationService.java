@@ -88,18 +88,11 @@ public class AuthenticationService {
 
             // Usuário não encontrado
             throw new RuntimeException("Usuário não encontrado");
-        } catch (com.mongodb.MongoTimeoutException e) {
-            log.error("❌ MongoDB timeout - Banco indisponível: {}", e.getMessage());
-            throw new RuntimeException("⏱️ MongoDB indisponível. Servidor indisponível. Tente novamente em alguns momentos.", e);
-        } catch (com.mongodb.MongoException e) {
-            log.error("❌ Erro MongoDB: {}", e.getMessage());
-            throw new RuntimeException("🔴 Erro de conexão com banco de dados. Verifique sua conexão com o MongoDB.", e);
         } catch (RuntimeException e) {
-            log.warn("⚠️ Erro de autenticação: {}", e.getMessage());
             throw e;
         } catch (Exception e) {
-            log.error("❌ Erro inesperado no login: {}", e.getMessage());
-            throw new RuntimeException("❌ Erro ao processar login: " + e.getMessage(), e);
+            log.error("Erro de autenticação: {}", e.getMessage(), e);
+            throw new RuntimeException("Erro de conexão com banco de dados.", e);
         }
     }
 

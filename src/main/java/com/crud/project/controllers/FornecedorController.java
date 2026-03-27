@@ -23,6 +23,7 @@ import java.util.Optional;
  * - PUT /api/fornecedores/{id} → Atualizar fornecedor
  * - DELETE /api/fornecedores/{id} → Deletar fornecedor
  */
+
 @Slf4j
 @AllArgsConstructor
 @RestController
@@ -46,7 +47,7 @@ public class FornecedorController {
      * GET /api/fornecedores/{id}
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Fornecedor> getById(@PathVariable String id) {
+    public ResponseEntity<Fornecedor> getById(@PathVariable Long id) {
         Optional<Fornecedor> fornecedor = fornecedorRepository.findById(id);
         return fornecedor
                 .map(ResponseEntity::ok)
@@ -92,7 +93,7 @@ public class FornecedorController {
      * PUT /api/fornecedores/{id}
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Fornecedor> update(@PathVariable String id, @RequestBody Fornecedor fornecedorDetails) {
+    public ResponseEntity<Fornecedor> update(@PathVariable Long id, @RequestBody Fornecedor fornecedorDetails) {
         Optional<Fornecedor> fornecedor = fornecedorRepository.findById(id);
         if (fornecedor.isPresent()) {
             Fornecedor f = fornecedor.get();
@@ -116,7 +117,7 @@ public class FornecedorController {
      * DELETE /api/fornecedores/{id}
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (fornecedorRepository.existsById(id)) {
             fornecedorRepository.deleteById(id);
             return ResponseEntity.noContent().build();

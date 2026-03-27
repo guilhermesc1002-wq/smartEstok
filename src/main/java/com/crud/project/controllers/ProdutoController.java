@@ -46,7 +46,7 @@ public class ProdutoController {
      * GET /api/produtos/{id}
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Produtos> getById(@PathVariable String id) {
+    public ResponseEntity<Produtos> getById(@PathVariable Long id) {
         Optional<Produtos> produto = produtosRepository.findById(id);
         return produto
                 .map(ResponseEntity::ok)
@@ -68,7 +68,7 @@ public class ProdutoController {
      * GET /api/produtos/fornecedor/{fornecedorId}
      */
     @GetMapping("/fornecedor/{fornecedorId}")
-    public ResponseEntity<List<Produtos>> getByFornecedor(@PathVariable String fornecedorId) {
+    public ResponseEntity<List<Produtos>> getByFornecedor(@PathVariable Long fornecedorId) {
         List<Produtos> produtos = produtosRepository.findByFornecedorId(fornecedorId);
         return ResponseEntity.ok(produtos);
     }
@@ -88,7 +88,7 @@ public class ProdutoController {
      * PUT /api/produtos/{id}
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Produtos> update(@PathVariable String id, @RequestBody Produtos produtoDetails) {
+    public ResponseEntity<Produtos> update(@PathVariable Long id, @RequestBody Produtos produtoDetails) {
         Optional<Produtos> produto = produtosRepository.findById(id);
         if (produto.isPresent()) {
             Produtos p = produto.get();
@@ -112,7 +112,7 @@ public class ProdutoController {
      * DELETE /api/produtos/{id}
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (produtosRepository.existsById(id)) {
             produtosRepository.deleteById(id);
             return ResponseEntity.noContent().build();
