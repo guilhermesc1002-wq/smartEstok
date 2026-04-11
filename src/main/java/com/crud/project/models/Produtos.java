@@ -1,20 +1,21 @@
 package com.crud.project.models;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "produtos")
+@Entity
+@Table(name = "produtos")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Produtos {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "Nome do produto é obrigatório")
     private String nome;
@@ -29,65 +30,25 @@ public class Produtos {
     private int quantidade;
 
     @NotBlank(message = "Fornecedor é obrigatório")
-    private String fornecedorId;
+    private Long fornecedorId;
 
     private String categoria;
 
     // Getters explícitos
-    public String getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public String getFornecedorId() {
-        return fornecedorId;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
+    public Long getId() { return id; }
+    public String getNome() { return nome; }
+    public String getDescricao() { return descricao; }
+    public Double getPreco() { return preco; }
+    public int getQuantidade() { return quantidade; }
+    public Long getFornecedorId() { return fornecedorId; }
+    public String getCategoria() { return categoria; }
 
     // Setters explícitos
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public void setFornecedorId(String fornecedorId) {
-        this.fornecedorId = fornecedorId;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
+    public void setId(Long id) { this.id = id; }
+    public void setNome(String nome) { this.nome = nome; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
+    public void setPreco(Double preco) { this.preco = preco; }
+    public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
+    public void setFornecedorId(Long fornecedorId) { this.fornecedorId = fornecedorId; }
+    public void setCategoria(String categoria) { this.categoria = categoria; }
 }

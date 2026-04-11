@@ -1,32 +1,28 @@
 package com.crud.project.models;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-/**
- * Modelo para registro de Importações
- *
- * Armazena metadados sobre cada importação realizada
- */
-@Document(collection = "importacoes")
+@Entity
+@Table(name = "importacoes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Importacao {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String nomeArquivo;
 
     private String tipoArquivo; // CSV, EXCEL, JSON
 
-    private String usuarioId;
+    private Long usuarioId;
 
     private String nomeUsuario;
 
@@ -48,4 +44,3 @@ public class Importacao {
 
     private boolean ativo = true;
 }
-

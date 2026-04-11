@@ -45,7 +45,7 @@ public class UsuarioController {
      * GET /api/usuarios/{id}
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> getById(@PathVariable String id) {
+    public ResponseEntity<Usuario> getById(@PathVariable Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         return usuario
                 .map(ResponseEntity::ok)
@@ -81,7 +81,7 @@ public class UsuarioController {
      * Body: { "nomeColaborador": "...", ... }
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> update(@PathVariable String id, @RequestBody Usuario usuarioDetails) {
+    public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario usuarioDetails) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()) {
             Usuario u = usuario.get();
@@ -103,7 +103,7 @@ public class UsuarioController {
      * DELETE /api/usuarios/{id}
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (usuarioRepository.existsById(id)) {
             usuarioRepository.deleteById(id);
             return ResponseEntity.noContent().build();

@@ -2,7 +2,9 @@ package com.crud.project.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -10,6 +12,8 @@ import java.util.List;
  * DTO para resposta de importação de vendas
  */
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImportacaoResultadoDTO {

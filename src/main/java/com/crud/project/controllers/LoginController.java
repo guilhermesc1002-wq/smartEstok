@@ -4,8 +4,11 @@ import com.crud.project.dto.LoginRequest;
 import com.crud.project.dto.LoginResponse;
 import com.crud.project.services.AuthenticationService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,6 +133,8 @@ public class LoginController {
 
     // Classes auxiliares para respostas
     @Data
+    @Getter
+    @Setter
     @NoArgsConstructor
     public static class ErrorResponse {
         private String error;
@@ -142,6 +147,8 @@ public class LoginController {
     }
 
     @Data
+    @Getter
+    @Setter
     @NoArgsConstructor
     public static class MessageResponse {
         private String message;
@@ -152,12 +159,18 @@ public class LoginController {
     }
 
     @Data
+    @Getter
+    @Setter
     @NoArgsConstructor
     public static class EmailRequest {
         private String email;
+        public String getEmail() { return email; }
+        public void setEmail(String email) { this.email = email; }
     }
 
     @Data
+    @Getter
+    @Setter
     @NoArgsConstructor
     public static class CpfRequest {
         private String cpf;

@@ -1,14 +1,13 @@
 package com.crud.project.repositories;
 
 import com.crud.project.models.Funcionario;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface FuncionarioRepository extends MongoRepository<Funcionario, String> {
+public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
     Optional<Funcionario> findByEmail(String email);
     Optional<Funcionario> findByCpf(String cpf);
 }
-

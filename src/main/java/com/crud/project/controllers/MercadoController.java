@@ -45,7 +45,7 @@ public class MercadoController {
      * GET /api/mercados/{id}
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Mercado> getById(@PathVariable String id) {
+    public ResponseEntity<Mercado> getById(@PathVariable Long id) {
         Optional<Mercado> mercado = mercadoRepository.findById(id);
         return mercado
                 .map(ResponseEntity::ok)
@@ -79,7 +79,7 @@ public class MercadoController {
      * PUT /api/mercados/{id}
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Mercado> update(@PathVariable String id, @RequestBody Mercado mercadoDetails) {
+    public ResponseEntity<Mercado> update(@PathVariable Long id, @RequestBody Mercado mercadoDetails) {
         Optional<Mercado> mercado = mercadoRepository.findById(id);
         if (mercado.isPresent()) {
             Mercado m = mercado.get();
@@ -105,7 +105,7 @@ public class MercadoController {
      * DELETE /api/mercados/{id}
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (mercadoRepository.existsById(id)) {
             mercadoRepository.deleteById(id);
             return ResponseEntity.noContent().build();
